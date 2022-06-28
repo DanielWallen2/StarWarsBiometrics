@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(13, 110, 253);
+    text-align: center;
+}
+
+main {
+    padding-bottom: 2rem;
+}
+
+.row {
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+}
+
+#input-col, #lable-col, #text-col {
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-bottom: 0rem;
+}
+
+#form-label {
+    padding-top: 4rem;
+    padding-bottom: 0rem;
+    margin-top: 4rem;
+    margin-bottom: 0rem;
+}
+
+#button-col {
+    padding-left: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0rem;
+}
+
+#enter {
+    display: inline-flex;
+    float:left;
+}
+
+textarea {
+    font-size: 0.9rem;
+    display: flow-root;
+    width: 100%;
+    resize: vertical;
+    border-width: 0px;
+    margin-top: 1rem;
+}
+
+footer {
+    background-color: rgb(228, 228, 228);
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.7rem;
+}
+.footer {
+    margin-bottom: 0px;
+}
