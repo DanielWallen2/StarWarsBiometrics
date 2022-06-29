@@ -1,9 +1,12 @@
 
-
-
-let output = document.querySelector('#output');
+const ctrl = document.querySelector('#q-name');
 const enterBtn = document.querySelector('#enter');
-const ctrl = document.querySelector('#name');
+const eUid = document.querySelector('#uid');
+const eLable = document.querySelector('#c-lable');
+const eName = document.querySelector('#c-name');
+const eDescription = document.querySelector('#description');
+const propLable = document.querySelector('#property');
+const output = document.querySelector('#output');
 
 enterBtn.addEventListener('click', function() {
 
@@ -14,73 +17,46 @@ enterBtn.addEventListener('click', function() {
     uri += ctrl.value;
     ctrl.value = '';
 
-    console.log(uri)
-
     fetch(uri)
         .then(res => res.json())
-        .then(data => {
-            
-            console.log(data.message);
-            console.log(data.result);
-            console.log(data);
+        .then(data => makeOutput(data))
 
-            const resLen = Number.parseInt(data.result.length)
-            if(resLen === 0) {
-                output.innerHTML = 'No match found'
-                return
-            }
-            
-            let prop = data.result[0].properties
-            console.log(prop)
-
-            const uid = data.result[0].uid
-            const name = prop.name
-            const description = data.result[0].description
-            const gender = prop.gender
-            const height = prop.height
-            const mass = prop.mass
-            const skinColour = prop.skin_color
-            const hairColour = prop.hair_color
-            const eyeColour = prop.eye_color
-            const homeWorld = prop.homeworld
-
-            output.innerHTML = `Id: ${uid}\n` +
-                `Name: ${name}\nDescription: ${description}\nGender: ${gender}\nHeight: ${height}\nMass: ${mass}\n` +
-                `Skin-colour: ${skinColour}\nHair-colour ${hairColour}\nEye-colour: ${eyeColour}\n` +
-                `Home Planet: ${homeWorld}`
-
-        })
-        // .catch(error => console.log('Error: ' + error))
 });
 
+function makeOutput(data) {
 
-
-
-
-
-
-
-// function getApi() {
+    const resLen = Number.parseInt(data.result.length)
+    if(resLen === 0) {
+        output.innerHTML = 'No match found'
+        return
+    }
     
-//     /*Skriv din kod här*/
-    
-//     fetch(uri)
-//         .then(res => res.json())
-//         .then(data => {
-//             console.log(data);
-//             // output.innerHTML += data;
-//         })
-//         .catch(err => console.log(err))
+    const props = data.result[0].properties
 
-// }
+    const uid = data.result[0].uid
+    const name = props.name
+    const description = data.result[0].description
 
+    eUid.innerText = `Id: ${uid}`
+    eLable.innerText = 'Namn: '
+    eName.innerText = `${name}`
+    eDescription.innerText = `Description: ${description}`
+    propLable.innerText = 'Egenskaper:'
 
+    let html = '', br = '', propName = '', propValue = '';
+    Object.entries(props).map(prop => {
 
-// if(ctrl.value === '') return;
+        if(prop[0] !== 'name') {
 
-//     uri += ctrl.value;
+            propName = prop[0].replace(/_/g, '-')
+            propName = propName[0].toUpperCase() + propName.slice(1).toLowerCase()
+            propValue = prop[1][0].toUpperCase() + prop[1].slice(1).toLowerCase()
 
-//     getApi();
+            html += br + `${propName}: ${propValue}`
+            br = '\n'
+        }
+        
+    })
+    output.innerHTML = html
 
-    
-//     ctrl.value = '';
+}
